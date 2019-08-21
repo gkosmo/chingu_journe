@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+<%= render "form", entry: Entry.new %>
+<h1>Entries</h1>
+
+<% @entries.each do |entry| %>
+  <div class="card">
+
+   <div class="card-body div-entry-<%= entry.id%>">
+     <h2 class="card-title bold"> <%= entry.title %> </h2>
+     <div class="card-text"> <%= entry.body %> </div>
+     <small>written on: <%= entry.created_at.strftime("%b %d, %Y") %> </small>
+   </div>
+   <div class="disappear card-body div-entry-<%= entry.id%>" >
+    <%= render "form", entry: entry %>
+   </div>
+   <%= link_to "delete", entry_path(entry.id), method: :delete, class: "btn btn-danger" %>
+   <button class="btn btn-warning edit-entry" data-id="div-entry-<%= entry.id%>"> Edit </button>
+  </div>
+<% end %>
+
+<br>
